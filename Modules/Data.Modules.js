@@ -19,9 +19,25 @@ const charitySchema = new mongoose.Schema({
         description: { type: String },
         address:{type:String},
         url:{type:String},
+        logo :{type:String},
     }],
 });
 
 const charityModel = mongoose.model('charity', charitySchema);
 
-module.exports = {animalsModel,charityModel};
+const endangeredAnimalsSchema = new mongoose.Schema({
+    endangeredAnimals: [{
+        name: { type: String },
+        description: { type: String },
+        home:{type:String},
+        image_url:{type:String},
+    }],
+});
+
+const endangeredAnimalsModel = mongoose.model('endangeredAnimal', endangeredAnimalsSchema);
+
+module.exports = {
+    animalsModel,
+    charityModel,
+    endangeredAnimalsModel,
+};
