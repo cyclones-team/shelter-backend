@@ -11,15 +11,28 @@ const getKey = (header, callback) => {
         callback(null, signingKey);
     });
 };
+const { charityModel } = require('../Modules/Data.Modules');
+const charitiesData = require("../Modules/charities.json")
 
 const authHandler = (req, res) => {
-    const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token, getKey, {}, (err, user) => {
+    let useremail = req.params.email
+    console.log(useremail)
+    charityModel.find({ email: useremail }, (err, data) => {
+
         if (err) {
-            res.send("invalid token");
+            console.error(err);
+        } else {
+            if (!data.length > 0) {
+                console.log('here')
+                const Charity = new charityModel({
+                    email: useremail,
+                    charities: charitiesData,
+                });
+                Charity.save();
+                res.send('done');
+            } else { console.log('here1'); }
         }
-        res.send(user);
-        console.log("Hello World");
-    });
-}
+    })
+};
+
 module.exports = authHandler;

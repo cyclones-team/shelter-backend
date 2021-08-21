@@ -22,11 +22,11 @@ const addCharityHandler = async (req, res) => {
                 description: req.body.description,
                 address: req.body.address,
                 url: req.body.url,
-                logo: req.req.logo
+                logo: req.req.logo,
             });
             // console.log(charitiesData.charities);
             charitiesData.save();
-            res.json(charitiesData)
+            res.json(charitiesData);
         }
     });
 };
