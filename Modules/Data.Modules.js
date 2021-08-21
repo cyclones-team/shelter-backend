@@ -23,7 +23,8 @@ const charitySchema = new mongoose.Schema({
     }],
 });
 
-const charityModel = mongoose.model('charity', charitySchema);
+
+const charityModel = mongoose.model('charities', charitySchema);
 
 const endangeredAnimalsSchema = new mongoose.Schema({
     endangeredAnimals: [{

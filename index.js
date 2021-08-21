@@ -19,24 +19,25 @@ const {
   updateCharityHandler,
 } = require('./Controllers/charity.Controllers');
 const getEndangeredAnimalsHandler=require('./Controllers/endangeredAnimals.controllers')
-
+const adoptionHandler = require('./Controllers/adoption.controllers');
 mongoose.connect(process.env.MONGO_ATLAS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 app.get("/", liveHandler);
-app.get("/auth", authHandler);
+app.get("/auth/:email", authHandler);
 app.get('/charity', getCharitiesHandler);
 app.post('/charity',addCharityHandler);
 app.delete('/charity/:id',deleteCharityHandler);
 app.put('/charity/:id',updateCharityHandler);
 app.get('/endangered',getEndangeredAnimalsHandler);
+app.get('/adopte',adoptionHandler);
 
 // seedAnimalsData();
 // seedCharitysData();
 // seedEndangeredAnimalsData();
 
-app.listen(PORT, () => {
+app.listen(3020, () => {
   console.log(`you can find me a live at ${PORT}`);
 });
