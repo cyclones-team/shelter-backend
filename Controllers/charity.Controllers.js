@@ -2,17 +2,21 @@
 
 const {charityModel} = require('../Modules/Data.Modules');
 
-const getCharitiesHandler = (req, res) => {
-    console.log(req.params.email);
-    charityModel.find({email:req.params.email}, (err, charitiesData) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(charitiesData)
-        }
-    });
-};
 
+async function getCharitiesHandler(request, response) {
+      
+    const email = request.params.email;
+        await charityModel.find({ email }, (error, data) => {
+          if (error) {
+              console.log('here')
+            handleError(error);
+          }
+          console.log(data)
+          response.json(data[0]);
+        });
+      }
+ 
+ 
 const addCharityHandler = async (req, res) => {
     charityModel.find({email:req.body.email}, (error, charitiesData) => {
         if (error) {

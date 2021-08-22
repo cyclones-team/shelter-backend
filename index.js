@@ -38,6 +38,6 @@ app.get('/adopte',adoptionHandler);
 // seedCharitysData();
 // seedEndangeredAnimalsData();
 
-app.listen(3020, () => {
+app.listen(process.env.PORT||3050, () => {
   console.log(`you can find me a live at ${PORT}`);
 });
