@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_ATLAS, {
 
 app.get("/", liveHandler);
 app.get("/auth/:email", authHandler);
-app.get('/charity', getCharitiesHandler);
+app.get('/charity/:email', getCharitiesHandler);
 app.post('/charity',addCharityHandler);
 app.delete('/charity/:id',deleteCharityHandler);
 app.put('/charity/:id',updateCharityHandler);

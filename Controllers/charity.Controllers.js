@@ -1,9 +1,10 @@
 'use strict';
 
-const charityModel = require('../Modules/Data.Modules');
+const {charityModel} = require('../Modules/Data.Modules');
 
 const getCharitiesHandler = (req, res) => {
-    charityModel.find({}, (err, charitiesData) => {
+    console.log(req.params.email);
+    charityModel.find({email:req.params.email}, (err, charitiesData) => {
         if (err) {
             res.send(err)
         } else {
@@ -13,7 +14,7 @@ const getCharitiesHandler = (req, res) => {
 };
 
 const addCharityHandler = async (req, res) => {
-    charityModel.findOne({ email: req.body.email }, (error, charitiesData) => {
+    charityModel.find({email:req.body.email}, (error, charitiesData) => {
         if (error) {
             res.send(error);
         } else {
@@ -23,6 +24,7 @@ const addCharityHandler = async (req, res) => {
                 address: req.body.address,
                 url: req.body.url,
                 logo: req.req.logo,
+        
             });
             // console.log(charitiesData.charities);
             charitiesData.save();
