@@ -6,6 +6,12 @@ const PORT = process.env.PORT;
 const cors = require("cors");
 const mongoose = require("mongoose");
 app.use(cors());
+// app.use(express.json());
+
+app.use(require('body-parser').urlencoded({ extended: true }))
+// app.use(.json())
+
+app.use(express.static('public'));
 
 const liveHandler = require('./Controllers/live.Controllers');
 const authHandler = require('./Controllers/auth.Controllers');
@@ -28,7 +34,9 @@ mongoose.connect(process.env.MONGO_ATLAS, {
 app.get("/", liveHandler);
 app.get("/auth/:email", authHandler);
 app.get('/charity/:email', getCharitiesHandler);
-app.post('/charity',addCharityHandler);
+app.post('/charity',(req,res)=>{
+ res.send(req.body);
+});
 app.delete('/charity/:id',deleteCharityHandler);
 app.put('/charity/:id',updateCharityHandler);
 app.get('/endangered',getEndangeredAnimalsHandler);
