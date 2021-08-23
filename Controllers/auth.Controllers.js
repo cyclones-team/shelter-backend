@@ -16,7 +16,7 @@ const charitiesData = require("../Modules/charities.json")
 
 const authHandler = (req, res) => {
     let useremail = req.params.email
-    console.log(useremail)
+ 
     charityModel.find({ email: useremail }, (err, data) => {
 
         if (err) {

@@ -1,36 +1,35 @@
 'use strict';
 
-const {charityModel} = require('../Modules/Data.Modules');
-
+const { charityModel } = require('../Modules/Data.Modules');
 
 async function getCharitiesHandler(request, response) {
-      
+
     const email = request.params.email;
-        await charityModel.find({ email }, (error, data) => {
-          if (error) {
-              console.log('here')
-            handleError(error);
-          }
-          response.json(data[0]);
-        });
-      } 
+    await charityModel.find({ email }, (error, data) => {
+        if (error) {
+            console.log('here')
+           resp
+        }
+        response.json(data[0]);
+    });
+}
 const addCharityHandler = async (req, res) => {
-    const email=req.query.email;
-    console.log(email);
-    charityModel.find({email}, (error, charitiesData) => {
+    const email = req.query.email;
+    console.log(req.body);
+   await charityModel.find({email}, async (error, charitiesData) => {
         if (error) {
             res.send(error);
         } else {
-            charitiesData.charities.push({
-                name: req.body.name,
-                description: req.body.description,
-                address: req.body.address,
-                url: req.body.url,
-                logo: req.req.logo,
-        
+            console.log(charitiesData);
+              charitiesData.charities.push({
+                name: req.query.name,
+                description: req.query.description,
+                address: req.query.address,
+                url: req.query.url,
+                logo: req.query.logo,
             });
             // console.log(charitiesData.charities);
-            charitiesData.save();
+            await charitiesData.save();
             res.json(charitiesData);
         }
     });
@@ -50,19 +49,20 @@ const deleteCharityHandler = (req, res) => {
 };
 
 const updateCharityHandler = (req, res) => {
-    bookModel.findOne({ email: req.body.email }, (error, charitiesData) => {
+    let email = req.query.email
+    charityModel.findOne({ email: email }, (error, charitiesData) => {
         if (error) {
             res.send(error)
         } else {
             charitiesData.charities.splice(req.params.id, 1, {
-                name: req.body.name,
-                description: req.body.description,
-                address: req.body.address,
-                url: req.body.url,
-                logo: req.req.logo,
+                name: req.query.name,
+                description: req.query.description,
+                address: req.query.address,
+                url: req.query.url,
+                logo: req.query.logo,
             });
             charitiesData.save();
-            res.send(charitiesData)
+            res.json(charitiesData)
         }
     });
 };
