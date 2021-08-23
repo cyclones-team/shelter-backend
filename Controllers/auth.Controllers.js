@@ -29,7 +29,7 @@ const authHandler = (req, res) => {
                     charities: charitiesData,
                 });
                 Charity.save();
-                res.send('done');
+              
             } else { console.log('here1'); }
         }
     })

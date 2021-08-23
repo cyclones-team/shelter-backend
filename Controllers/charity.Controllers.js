@@ -11,14 +11,13 @@ async function getCharitiesHandler(request, response) {
               console.log('here')
             handleError(error);
           }
-          console.log(data)
           response.json(data[0]);
         });
-      }
- 
- 
+      } 
 const addCharityHandler = async (req, res) => {
-    charityModel.find({email:req.body.email}, (error, charitiesData) => {
+    const email=req.query.email;
+    console.log(email);
+    charityModel.find({email}, (error, charitiesData) => {
         if (error) {
             res.send(error);
         } else {
