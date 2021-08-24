@@ -15,22 +15,32 @@ async function getCharitiesHandler(request, response) {
 }
 const addCharityHandler = async (req, res) => {
     const email = req.query.email;
-    console.log(req.body);
-   await charityModel.find({email}, async (error, charitiesData) => {
+    console.log(email,req.query.name,req.query.description,req.query.address,req.query.url,req.query.logo);
+    // charityModel.updateOne({email},{$push:{charities:{
+    //     name: req.query.name,
+    //     description: req.query.description,
+    //     address: req.query.address,
+    //     url: req.query.url,
+    //     logo: req.query.logo,
+    // }}}).save() 
+    // ; 
+  await charityModel.find({email},(error, charitiesData) => {
         if (error) {
             res.send(error);
         } else {
             console.log(charitiesData);
-              charitiesData.charities.push({
-                name: req.query.name,
-                description: req.query.description,
-                address: req.query.address,
-                url: req.query.url,
-                logo: req.query.logo,
-            });
-            // console.log(charitiesData.charities);
-            await charitiesData.save();
-            res.json(charitiesData);
+            let data ={
+                "name":`${ req.query.name}`,
+                "description": `${req.query.description}`,
+                "address": `${req.query.address}`,
+                "url": `${req.query.url}`,
+                "logo": `${req.query.logo}`,
+            }
+            console.log(data);
+            charitiesData.charities.push(data);
+            console.log(charitiesData);
+           charityModel.save();
+            res.json(charityModel);
         }
     });
 };
@@ -62,7 +72,7 @@ const updateCharityHandler = (req, res) => {
                 logo: req.query.logo,
             });
             charitiesData.save();
-            res.json(charitiesData)
+            res.json(charitiesData);
         }
     });
 };
