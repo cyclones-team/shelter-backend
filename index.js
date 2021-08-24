@@ -22,7 +22,7 @@ const {
 } = require('./Controllers/charity.Controllers');
 
 const getEndangeredAnimalsHandler = require('./Controllers/endangeredAnimals.controllers')
-const adoptionHandler = require('./Controllers/adoption.controllers');
+const {adoptionHandler,deleteHandler} = require('./Controllers/adoption.controllers');
 mongoose.connect(process.env.MONGO_ATLAS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -36,6 +36,7 @@ app.delete('/charity/:id', deleteCharityHandler);
 app.put('/charity/:id', updateCharityHandler);
 app.get('/endangered', getEndangeredAnimalsHandler);
 app.get('/adopte', adoptionHandler);
+app.delete('/adopte/:id', deleteHandler);
 
 // seedAnimalsData();
 // seedEndangeredAnimalsData();

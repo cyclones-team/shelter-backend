@@ -1,5 +1,5 @@
 const { animalsModel } = require('../Modules/Data.Modules');
-const adoptionHandler = async(req,res) => {
+const adoptionHandler = async (req, res) => {
     await animalsModel.find({}, (error, data) => {
         if (error) {
             console.log('here')
@@ -7,4 +7,15 @@ const adoptionHandler = async(req,res) => {
         res.json(data);
     });
 }
-module.exports=adoptionHandler;
+const deleteHandler = (req, res) => {
+    animalsModel.findOne({}, (error, data) => {
+        if (error) {
+            res.send(error)
+        } else {
+            data.animals.splice(req.params.id, 1);
+            data.save();
+            res.send(data);
+        }
+    })
+}
+module.exports = { adoptionHandler, deleteHandler };
