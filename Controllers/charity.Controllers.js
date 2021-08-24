@@ -14,17 +14,6 @@ async function getCharitiesHandler(request, response) {
 }
 const addCharityHandler = async (req, res) => {
     const data = req.body;
-    // console.log(email,req.query.name,req.query.description,req.query.address,req.query.url,req.query.logo);
-    // charityModel.updateOne({email},{$push:{charities:{
-    //     name: req.query.name,
-    //     description: req.query.description,
-    //     address: req.query.address,
-    //     url: req.query.url,
-    //     logo: req.query.logo,
-    // }}}).save() 
-    // ; 
-    // console.log(data);
-    // res.send("tester")
 await charityModel.find({email:data.email},(error, charitiesData) => {
       let {name, description,address,url,logo}=data
       let item={
@@ -44,7 +33,6 @@ await charityModel.find({email:data.email},(error, charitiesData) => {
         }
     });
 };
-
 const deleteCharityHandler = (req, res) => {
 
     charityModel.findOne({ email: req.query.email }, (error, charitiesData) => {

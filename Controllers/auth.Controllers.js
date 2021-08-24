@@ -15,7 +15,7 @@ const { charityModel } = require('../Modules/Data.Modules');
 const charitiesData = require("../Modules/charities.json")
 const authHandler = (req, res) => {
     let useremail = req.params.email
- 
+
     charityModel.find({ email: useremail }, (err, data) => {
 
         if (err) {
@@ -28,7 +28,7 @@ const authHandler = (req, res) => {
                     charities: charitiesData,
                 });
                 Charity.save();
-              
+
             } else { console.log('here1'); }
         }
     })

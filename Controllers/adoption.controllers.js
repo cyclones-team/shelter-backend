@@ -4,7 +4,6 @@ const adoptionHandler = async(req,res) => {
         if (error) {
             console.log('here')
         }
-        // console.log(data[0]);
         res.json(data);
     });
 }

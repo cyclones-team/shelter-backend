@@ -1,6 +1,6 @@
 'use strict';
 
-const {endangeredAnimalsModel} = require('../Modules/Data.Modules');
+const { endangeredAnimalsModel } = require('../Modules/Data.Modules');
 
 const getEndangeredAnimalsHandler = (req, res) => {
     endangeredAnimalsModel.find({}, (err, endangeredAnimalsData) => {
