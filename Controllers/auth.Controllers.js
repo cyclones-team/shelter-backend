@@ -13,7 +13,6 @@ const getKey = (header, callback) => {
 };
 const { charityModel } = require('../Modules/Data.Modules');
 const charitiesData = require("../Modules/charities.json")
-
 const authHandler = (req, res) => {
     let useremail = req.params.email
  

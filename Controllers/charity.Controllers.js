@@ -8,14 +8,13 @@ async function getCharitiesHandler(request, response) {
     await charityModel.find({ email }, (error, data) => {
         if (error) {
             console.log('here')
-           resp
         }
         response.json(data[0]);
     });
 }
 const addCharityHandler = async (req, res) => {
-    const email = req.query.email;
-    console.log(email,req.query.name,req.query.description,req.query.address,req.query.url,req.query.logo);
+    const data = req.body;
+    // console.log(email,req.query.name,req.query.description,req.query.address,req.query.url,req.query.logo);
     // charityModel.updateOne({email},{$push:{charities:{
     //     name: req.query.name,
     //     description: req.query.description,
@@ -24,23 +23,24 @@ const addCharityHandler = async (req, res) => {
     //     logo: req.query.logo,
     // }}}).save() 
     // ; 
-  await charityModel.find({email},(error, charitiesData) => {
+    // console.log(data);
+    // res.send("tester")
+await charityModel.find({email:data.email},(error, charitiesData) => {
+      let {name, description,address,url,logo}=data
+      let item={
+          name:name,
+          description:description,
+          address:address,
+          url:url,
+          logo:logo
+      }
         if (error) {
             res.send(error);
         } else {
-            console.log(charitiesData);
-            let data ={
-                "name":`${ req.query.name}`,
-                "description": `${req.query.description}`,
-                "address": `${req.query.address}`,
-                "url": `${req.query.url}`,
-                "logo": `${req.query.logo}`,
-            }
-            console.log(data);
-            charitiesData.charities.push(data);
-            console.log(charitiesData);
-           charityModel.save();
-            res.json(charityModel);
+            charitiesData.charities+=item
+            charitiesData.save()
+            console.log(charitiesData)
+           res.send(charitiesData)
         }
     });
 };
@@ -75,6 +75,7 @@ const updateCharityHandler = (req, res) => {
             res.json(charitiesData);
         }
     });
+
 };
 
 module.exports = {

@@ -3,10 +3,16 @@
 const mongoose = require("mongoose");
 
 const animalSchema = new mongoose.Schema({
-    email: { type: String },
     animals: [{
         name: { type: String },
         description: { type: String },
+        age:{type:String},
+        breeds:{type:String},
+        gender:{type:String},
+        picture:{type:String},
+        id:{type:Number},
+        type:{type:String},
+        size:{type:String},
     }],
 });
 
@@ -21,9 +27,6 @@ const charitySchema = new mongoose.Schema({
         url:{type:String},
         logo :{type:String},
     }],
-    animals:[
-        
-    ]
 });
 
 
@@ -39,6 +42,8 @@ const endangeredAnimalsSchema = new mongoose.Schema({
 });
 
 const endangeredAnimalsModel = mongoose.model('endangeredAnimal', endangeredAnimalsSchema);
+
+
 
 module.exports = {
     animalsModel,
