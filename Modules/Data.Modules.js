@@ -21,6 +21,9 @@ const charitySchema = new mongoose.Schema({
         url:{type:String},
         logo :{type:String},
     }],
+    animals:[
+        
+    ]
 });
 
 
