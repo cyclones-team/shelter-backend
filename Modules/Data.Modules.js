@@ -43,8 +43,6 @@ const endangeredAnimalsSchema = new mongoose.Schema({
 
 const endangeredAnimalsModel = mongoose.model('endangeredAnimal', endangeredAnimalsSchema);
 
-
-
 module.exports = {
     animalsModel,
     charityModel,
